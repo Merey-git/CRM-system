@@ -1,0 +1,100 @@
+body {
+    background-color: #f5f7fa;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+h1 {
+    color: #2b4c7e;
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+.card {
+    background: #ffffff;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    color: #2b4c7e;
+    font-weight: 600;
+}
+
+.card-text {
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.btn-primary {
+    background-color: #5271ff;
+    border: none;
+    border-radius: 8px;
+}
+
+.btn-primary:hover {
+    background-color: #3557ff;
+}
+
+.btn-success {
+    background-color: #27ae60;
+    border: none;
+    border-radius: 8px;
+}
+
+.btn-success:hover {
+    background-color: #219150;
+}
+
+.text-warning {
+    color: #ffb347 !important;
+}
+
+.container {
+    margin-top: 40px;
+}
+
+.navbar {
+    background-color: #2b4c7e !important;
+}
+
+.navbar a {
+    color: white !important;
+}
+
+.navbar .nav-link {
+    color: #f0f4ff !important;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 8px 14px;
+    border-radius: 8px;
+}
+
+.navbar .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #e2e6ff !important;
+}
+
+.navbar .nav-link.active {
+    background-color: #ffffff33;
+    color: #ffffff !important;
+    font-weight: 600;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+.navbar-brand {
+    color: #ffffff !important;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.navbar-brand:hover {
+    color: #cdd9ff !important;
+}
