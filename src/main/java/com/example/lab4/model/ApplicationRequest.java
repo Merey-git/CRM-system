@@ -3,6 +3,9 @@ package com.example.lab4.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -13,8 +16,19 @@ public class ApplicationRequest {
     private Long id;
 
     private String userName;
-    private String courseName;
     private String commentary;
     private String phone;
     private boolean handled;
+
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private Courses course;
+
+    @ManyToMany
+    @JoinTable(
+            name = "request_operators",
+            joinColumns = @JoinColumn(name = "request_id"),
+            inverseJoinColumns = @JoinColumn(name = "operator_id")
+    )
+    private List<Operators> operators = new ArrayList<>();
 }

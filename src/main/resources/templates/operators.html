@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Operators</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Operators</h1>
+        <a href="/operators/add" class="btn btn-success">+ Add Operator</a>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-4" th:each="operator : ${operators}">
+            <div class="card p-3">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${operator.fullName}">Operator Name</h5>
+                    <p class="card-text">
+                        <strong>Department:</strong>
+                        <span class="badge bg-info fw-semibold"
+                              th:text="${operator.department}">
+                        </span>
+                    </p>
+                    <form th:action="@{/operators/{id}/delete(id=${operator.id})}" method="post">
+                        <button class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:if="${operators.isEmpty()}" class="alert alert-info mt-4">
+        No operators available. Please add some operators first.
+    </div>
+</div>
+</body>
+</html>

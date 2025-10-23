@@ -1,6 +1,7 @@
 package com.example.lab4.service;
 
 import com.example.lab4.model.ApplicationRequest;
+import com.example.lab4.model.Operators;
 import com.example.lab4.repository.ApplicationRequestRepository;
 import org.springframework.stereotype.Service;
 
@@ -35,11 +36,34 @@ public class ApplicationRequestService {
         repository.deleteById(id);
     }
 
+    public void assignOperators(Long requestId, List<Long> operatorIds, OperatorsService operatorsService) {
+        ApplicationRequest request = getById(requestId);
+        if (request != null && !request.isHandled()) {
+            request.getOperators().clear();
+            for (Long operatorId : operatorIds) {
+                Operators operator = operatorsService.getById(operatorId);
+                if (operator != null) {
+                    request.getOperators().add(operator);
+                }
+            }
+            request.setHandled(true);
+            repository.save(request);
+        }
+    }
+
+    public void removeOperator(Long requestId, Long operatorId) {
+        ApplicationRequest request = getById(requestId);
+        if (request != null) {
+            request.getOperators().removeIf(op -> op.getId().equals(operatorId));
+            repository.save(request);
+        }
+    }
+
     public void markAsHandled(Long id) {
-        ApplicationRequest req = getById(id);
-        if (req != null) {
-            req.setHandled(true);
-            repository.save(req);
+        ApplicationRequest request = getById(id);
+        if (request != null) {
+            request.setHandled(true);
+            repository.save(request);
         }
     }
 }
