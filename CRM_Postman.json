@@ -1,0 +1,609 @@
+{
+  "info": {
+    "name": "CRM System REST API",
+    "description": "REST API для CRM-системы управления заявками на курсы",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "12345678"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080/api",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Application Requests",
+      "item": [
+        {
+          "name": "1. Получить все заявки",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/requests",
+              "host": ["{{base_url}}"],
+              "path": ["requests"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "2. Получить заявку по ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/requests/1",
+              "host": ["{{base_url}}"],
+              "path": ["requests", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "3. Получить необработанные заявки",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/requests/new",
+              "host": ["{{base_url}}"],
+              "path": ["requests", "new"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "4. Получить обработанные заявки",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/requests/processed",
+              "host": ["{{base_url}}"],
+              "path": ["requests", "processed"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "5. Создать новую заявку",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userName\": \"Нурзхан Абдиев\",\n  \"courseId\": 1,\n  \"commentary\": \"Хочу научиться Java разработке\",\n  \"phone\": \"+77771234567\",\n  \"handled\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/requests",
+              "host": ["{{base_url}}"],
+              "path": ["requests"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "6. Обновить заявку",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userName\": \"Нурзхан Абдиев - ОБНОВЛЕНО\",\n  \"courseId\": 1,\n  \"commentary\": \"Хочу научиться Java разработке - обновлено\",\n  \"phone\": \"+77771234567\",\n  \"handled\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/requests/1",
+              "host": ["{{base_url}}"],
+              "path": ["requests", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "7. Удалить заявку",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/requests/1",
+              "host": ["{{base_url}}"],
+              "path": ["requests", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "8. Назначить операторов на заявку",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"operatorIds\": [1, 2]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/requests/1/assign-operators",
+              "host": ["{{base_url}}"],
+              "path": ["requests", "1", "assign-operators"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "9. Удалить оператора из заявки",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/requests/1/operators/1",
+              "host": ["{{base_url}}"],
+              "path": ["requests", "1", "operators", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "10. Отметить заявку как обработанную",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/requests/1/mark-handled",
+              "host": ["{{base_url}}"],
+              "path": ["requests", "1", "mark-handled"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Courses",
+      "item": [
+        {
+          "name": "1. Получить все курсы",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/courses",
+              "host": ["{{base_url}}"],
+              "path": ["courses"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "2. Получить курс по ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/courses/1",
+              "host": ["{{base_url}}"],
+              "path": ["courses", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "3. Создать курс - Java",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Java Backend Development\",\n  \"description\": \"Полный курс по разработке на Java Spring Boot\",\n  \"price\": 150000\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/courses",
+              "host": ["{{base_url}}"],
+              "path": ["courses"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "4. Создать курс - Frontend",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Frontend Development\",\n  \"description\": \"React, Vue.js, TypeScript\",\n  \"price\": 120000\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/courses",
+              "host": ["{{base_url}}"],
+              "path": ["courses"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "5. Создать курс - Python",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Python Data Science\",\n  \"description\": \"Анализ данных и машинное обучение\",\n  \"price\": 180000\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/courses",
+              "host": ["{{base_url}}"],
+              "path": ["courses"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "6. Обновить курс",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Java Backend Development PRO\",\n  \"description\": \"Расширенный курс по разработке на Java Spring Boot\",\n  \"price\": 180000\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/courses/1",
+              "host": ["{{base_url}}"],
+              "path": ["courses", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "7. Удалить курс",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/courses/1",
+              "host": ["{{base_url}}"],
+              "path": ["courses", "1"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Operators",
+      "item": [
+        {
+          "name": "1. Получить всех операторов",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/operators",
+              "host": ["{{base_url}}"],
+              "path": ["operators"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "2. Получить оператора по ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/operators/1",
+              "host": ["{{base_url}}"],
+              "path": ["operators", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "3. Получить операторов по отделу",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/operators/department/Sales",
+              "host": ["{{base_url}}"],
+              "path": ["operators", "department", "Sales"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "4. Создать оператора - Алия",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Алия\",\n  \"surname\": \"Нурмаханова\",\n  \"department\": \"Sales\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/operators",
+              "host": ["{{base_url}}"],
+              "path": ["operators"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "5. Создать оператора - Ерлан",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Ерлан\",\n  \"surname\": \"Жакупов\",\n  \"department\": \"Support\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/operators",
+              "host": ["{{base_url}}"],
+              "path": ["operators"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "6. Создать оператора - Дина",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Дина\",\n  \"surname\": \"Сейтова\",\n  \"department\": \"Sales\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/operators",
+              "host": ["{{base_url}}"],
+              "path": ["operators"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "7. Обновить оператора",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Алия\",\n  \"surname\": \"Нурмаханова-Обновлено\",\n  \"department\": \"Support\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/operators/1",
+              "host": ["{{base_url}}"],
+              "path": ["operators", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "8. Удалить оператора",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/operators/1",
+              "host": ["{{base_url}}"],
+              "path": ["operators", "1"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Test Scenarios",
+      "item": [
+        {
+          "name": "ERROR - Получить несуществующую заявку",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/requests/999",
+              "host": ["{{base_url}}"],
+              "path": ["requests", "999"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ERROR - Создать заявку с несуществующим курсом",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userName\": \"Тест\",\n  \"courseId\": 999,\n  \"commentary\": \"Тест с несуществующим курсом\",\n  \"phone\": \"+77771111111\",\n  \"handled\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/requests",
+              "host": ["{{base_url}}"],
+              "path": ["requests"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ERROR - Обновить несуществующую заявку",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userName\": \"Тест\",\n  \"courseId\": 1,\n  \"commentary\": \"Тест\",\n  \"phone\": \"+7777\",\n  \"handled\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/requests/999",
+              "host": ["{{base_url}}"],
+              "path": ["requests", "999"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ERROR - Удалить несуществующую заявку",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/requests/999",
+              "host": ["{{base_url}}"],
+              "path": ["requests", "999"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

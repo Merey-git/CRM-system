@@ -1,5 +1,6 @@
 package com.example.lab4.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,7 +15,6 @@ public class ApplicationRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String userName;
     private String commentary;
     private String phone;
@@ -22,6 +22,7 @@ public class ApplicationRequest {
 
     @ManyToOne
     @JoinColumn(name = "course_id")
+    @JsonIgnoreProperties("requests")
     private Courses course;
 
     @ManyToMany
@@ -30,5 +31,6 @@ public class ApplicationRequest {
             joinColumns = @JoinColumn(name = "request_id"),
             inverseJoinColumns = @JoinColumn(name = "operator_id")
     )
+    @JsonIgnoreProperties("requests")
     private List<Operators> operators = new ArrayList<>();
 }
