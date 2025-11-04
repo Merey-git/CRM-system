@@ -1,7 +1,10 @@
 package com.example.lab4.api;
 
+import com.example.lab4.dto.ApplicationRequestDTO;
 import com.example.lab4.dto.OperatorDTO;
+import com.example.lab4.model.ApplicationRequest;
 import com.example.lab4.model.Operators;
+import com.example.lab4.service.ApplicationRequestService;
 import com.example.lab4.service.OperatorsService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,9 +18,12 @@ import java.util.stream.Collectors;
 public class OperatorsRestController {
 
     private final OperatorsService operatorsService;
+    private final ApplicationRequestService applicationRequestService;
 
-    public OperatorsRestController(OperatorsService operatorsService) {
+    public OperatorsRestController(OperatorsService operatorsService,
+                                   ApplicationRequestService applicationRequestService) {
         this.operatorsService = operatorsService;
+        this.applicationRequestService = applicationRequestService;
     }
 
     @GetMapping
@@ -101,6 +107,59 @@ public class OperatorsRestController {
 
         operatorsService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/{operatorId}/assign/{requestId}")
+    public ResponseEntity<ApplicationRequestDTO> assignOperatorToRequest(
+            @PathVariable Long operatorId,
+            @PathVariable Long requestId) {
+
+        Operators operator = operatorsService.getById(operatorId);
+        if (operator == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        ApplicationRequest request = applicationRequestService.getById(requestId);
+        if (request == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        if (request.getOperators().contains(operator)) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        request.getOperators().add(operator);
+        if (!request.isHandled()) {
+            request.setHandled(true);
+        }
+        applicationRequestService.save(request);
+        return ResponseEntity.ok(convertRequestToDTO(request));
+    }
+
+
+    private ApplicationRequestDTO convertRequestToDTO(ApplicationRequest request) {
+        ApplicationRequestDTO dto = new ApplicationRequestDTO();
+        dto.setId(request.getId());
+        dto.setUserName(request.getUserName());
+        dto.setCommentary(request.getCommentary());
+        dto.setPhone(request.getPhone());
+        dto.setHandled(request.isHandled());
+
+        if (request.getCourse() != null) {
+            dto.setCourseId(request.getCourse().getId());
+            dto.setCourseName(request.getCourse().getName());
+        }
+
+        if (request.getOperators() != null) {
+            List<OperatorDTO> operatorDTOs = request.getOperators().stream()
+                    .map(op -> new OperatorDTO(
+                            op.getId(),
+                            op.getName(),
+                            op.getSurname(),
+                            op.getDepartment()
+                    ))
+                    .collect(Collectors.toList());
+            dto.setOperators(operatorDTOs);
+        }
+
+        return dto;
     }
 
     private OperatorDTO convertToDTO(Operators operator) {
