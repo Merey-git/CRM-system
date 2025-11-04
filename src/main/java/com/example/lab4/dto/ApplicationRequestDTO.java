@@ -17,5 +17,5 @@ public class ApplicationRequestDTO {
     private boolean handled;
     private Long courseId;
     private String courseName;
-    private List<OperatorDTO> operators;  // ✅ Изменено с OperatorSimpleDTO на OperatorDTO
+    private List<OperatorDTO> operators;
 }

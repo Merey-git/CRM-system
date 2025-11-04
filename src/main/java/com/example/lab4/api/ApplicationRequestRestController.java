@@ -88,7 +88,6 @@ public class ApplicationRequestRestController {
 
     @PostMapping
     public ResponseEntity<ApplicationRequestDTO> createRequest(@RequestBody ApplicationRequestCreateDTO createDTO) {
-        // Проверяем, существует ли курс
         Courses course = coursesService.getById(createDTO.getCourseId());
         if (course == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
